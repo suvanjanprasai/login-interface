@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+
+
+
+    <link rel="icon" href="hacker.png" type="image/x-icon">
+    <title>LOGIN</title>
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+
+
+    <style>
+        body .main {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            color: green;
+        }
+
+        body .lines {
+            position: fixed;
+            font-weight: bold;
+            font-size: 16px;
+            font-family: consolas;
+            transform: rotate(270deg);
+            transition: transform 2s;
+            width: 10px;
+        }
+
+        body .lines div {
+            display: block;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            background: linear-gradient(90deg, transparent 30%, black 100%);
+        }
+
+
+
+        body:not(.user-is-tabbing) button:focus,
+        body:not(.user-is-tabbing) input:focus,
+        body:not(.user-is-tabbing) select:focus,
+        body:not(.user-is-tabbing) textarea:focus {
+            outline: none;
+        }
+
+        .container {
+            background-color: rgb(12, 12, 12);
+            height: 400px;
+            width: 400px;
+            position: absolute;
+            top: 55%;
+            right: 50%;
+            transform: translate(50%, -50%);
+            border-radius: 8px;
+            transition: box-shadow 0.5s;
+            transition-timing-function: ease-out;
+
+        }
+
+        .container:hover {
+            box-shadow: 6px 6px rgba(73, 73, 73, 0.4);
+        }
+
+        .container2 {
+            position: absolute;
+            top: 50%;
+            right: 50%;
+            transform: translate(50%, -50%);
+        }
+
+        .inp {
+            border: none;
+            background: none;
+            color: rgba(255, 255, 255, 0.555);
+            margin-bottom: 30px;
+            border-bottom: solid rgb(136, 136, 136) 0.5px;
+            transition: border-color 0.5s;
+            transition-timing-function: ease-out;
+            width: 250px;
+        }
+
+        input:hover {
+            border-bottom: solid rgb(233, 230, 230) 0.5px;
+
+
+
+        }
+
+        .Label {
+            color: rgb(196, 196, 193);
+            font-size: 20px;
+        }
+
+        ::-ms-reveal {
+            display: none;
+        }
+
+        .submitbtn {
+            padding-top: 14px;
+            padding-left: 14px;
+            padding-bottom: 14px;
+            padding-right: 14px;
+            font-weight: 600;
+            background: #14df1c;
+            border-radius: 15px;
+            color: rgb(236, 235, 235);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            left: 50%;
+            top: 20px;
+            transform: translate(-50%);
+            box-shadow: 2px 2px 7px #0fbb16;
+
+        }
+
+        .welcome {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translate(-50%);
+            color: rgb(223, 214, 204);
+            font-size: 60px;
+            font-family: consolas;
+
+
+            overflow: hidden;
+            /* Ensures the content is not revealed until the animation */
+            border-right: .1em solid rgb(223, 223, 223);
+            /* The typwriter cursor */
+            white-space: nowrap;
+            /* Keeps the content on a single line */
+            /* Gives that scrolling effect as the typing happens */
+            letter-spacing: .15em;
+            /* Adjust as needed */
+            animation:
+                typing 2.5s steps(40, end),
+                blink-caret .75s step-end infinite;
+        }
+
+        /* The typing effect */
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 50%
+            }
+        }
+
+        /* The typewriter cursor effect */
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: rgb(192, 192, 192);
+            }
+        }
+    </style>
+
+    <script>
+        window.console = window.console || function (t) { };
+    </script>
+
+
+
+</head>
+
+<body translate="no">
+
+    <div class="main"></div>
+    <p class="welcome"><b>ENCRYPTED LOGIN</b></p>
+
+    <div class="container">
+        <div class="container2">
+            <form action="vid.html">
+                <label for="UserName" class="Label" id="labelName">USERNAME</label><br><br>
+                <input type="text" class="inp" id="UserName"><br><br>
+
+                <label for="PassWord" class="Label" id="labelPass">PASSWORD</label><br><br>
+                <input type="password" class="inp" id="PassWord">
+
+                <input type="submit" name="login" class="submitbtn" value="LOGIN">
+            </form>
+        </div>
+    </div>
+    <script id="rendered-js">
+        var main = document.querySelector(".main");
+        //main.insertAdjacentHTML( 'beforeend', 'content' );
+
+        var lineCount = 40;
+        var minCharCount = 20;
+        var maxCharCount = 40;
+        var topPos = (maxCharCount - 1) / 2 * 10;
+        var mainWidth = main.offsetWidth;
+        var mainHeight = main.offsetHeight;
+
+        function random(min, max) {
+            return Math.floor(Math.random() * (max - min) + min);
+        }
+
+        function getLineChar(length) {
+            var result = "";
+            var characters = "01";
+            var charactersLength = characters.length;
+            for (var i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
+
+        function animate(index, charCount, opacity, potition, tick) {
+            var elem = document.querySelector("#line" + index);
+            var pos = -mainHeight;
+            var id = setInterval(frame, random(1, 10));
+            var lineChar = getLineChar(charCount);
+            var id2 = setInterval(function () {
+                var lineChar2 = getLineChar(charCount);
+                var textWidth = getTextWidth(lineChar2, "bold 16px Consolas");
+                elem.querySelector("span").innerHTML = lineChar2;
+                elem.querySelector("div").style.width = textWidth + "px";
+            }, tick);
+            function frame() {
+                var textWidth = getTextWidth(lineChar, "bold 16px Consolas");
+                if (pos == mainHeight + topPos) {
+                    clearInterval(id);
+                    clearInterval(id2);
+                    elem.style.top = -mainHeight + "px";
+                    animate(index, charCount, opacity, potition, tick);
+                } else {
+                    pos++;
+                    elem.style.top = pos + "px";
+                }
+            }
+        }
+
+        function generateLine(index, charCount, opacity, potition, tick) {
+            var html = "";
+            html += `<div class="lines" `;
+            html += `style="opacity:0.${opacity}; `;
+            html += `left:${position}px; `;
+            html += `top:-${topPos}px;" `;
+            html += `id="line${index}">`;
+            html += `<div>⠀</div>`;
+            html += `<span>${getLineChar(charCount)}<span>`;
+            html += `</div>`;
+            setTimeout(function () {
+                main.insertAdjacentHTML("beforeend", html);
+                animate(index, charCount, opacity, potition, tick);
+            }, tick + index * 100);
+        }
+
+        for (i = 0; i < lineCount; i++) {
+            var index = i;
+            var charCount = random(minCharCount, maxCharCount);
+            var opacity = random(6, 9);
+            var position = random(0, mainWidth);
+            var tick = random(300, 500);
+
+            generateLine(index, charCount, opacity, position, tick);
+        }
+
+        function getTextWidth(text, font) {
+            // re-use canvas object for better performance
+            var canvas =
+                getTextWidth.canvas || (
+                    getTextWidth.canvas = document.createElement("canvas"));
+            var context = canvas.getContext("2d");
+            context.font = font;
+            var metrics = context.measureText(text);
+            return metrics.width;
+        }
+
+        console.log(getTextWidth("hello there!", "bold 12px arial"));
+        //# sourceURL=pen.js
+    </script>
+
+
+</body>
+
+</html>
